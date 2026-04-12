@@ -1,7 +1,10 @@
-import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
-import { useMemo } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { SealText } from './SealText';
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.HankoDateStamp = HankoDateStamp;
+const jsx_runtime_1 = require("react/jsx-runtime");
+const react_1 = require("react");
+const react_native_1 = require("react-native");
+const SealText_1 = require("./SealText");
 const ENGLISH_WEEKDAYS = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 const JAPANESE_WEEKDAYS = ['日', '月', '火', '水', '木', '金', '土'];
 const VIETNAMESE_WEEKDAYS = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
@@ -19,9 +22,9 @@ function getStampWeekday(day, language = 'en') {
 function withAlpha(hexColor, alphaHex) {
     return /^#[0-9a-fA-F]{6}$/.test(hexColor) ? `${hexColor}${alphaHex}` : null;
 }
-export function HankoDateStamp({ date, language = 'en', tone = 'paper', size = 'regular', shape = 'circle', rotation = 0, distressed = true, color: colorProp, backgroundColor: backgroundColorProp, fontFamily, theme, style, textStyle, }) {
+function HankoDateStamp({ date, language = 'en', tone = 'paper', size = 'regular', shape = 'circle', rotation = 0, distressed = true, color: colorProp, backgroundColor: backgroundColorProp, fontFamily, theme, style, textStyle, }) {
     const parsed = toDate(date);
-    const parts = useMemo(() => {
+    const parts = (0, react_1.useMemo)(() => {
         const month = String(parsed.getMonth() + 1).padStart(2, '0');
         const day = String(parsed.getDate()).padStart(2, '0');
         return {
@@ -50,25 +53,25 @@ export function HankoDateStamp({ date, language = 'en', tone = 'paper', size = '
     const shapeStyles = shape === 'square' ? styles.squareShape : styles.circleShape;
     const innerShapeStyles = shape === 'square' ? styles.squareInnerShape : styles.circleShape;
     const textDistressScale = distressed ? (isOverlay ? 0.34 : 0.58) : 0;
-    const rotationStyle = useMemo(() => ({ transform: [{ rotate: `${rotation}deg` }] }), [rotation]);
-    return (_jsxs(View, { style: [
+    const rotationStyle = (0, react_1.useMemo)(() => ({ transform: [{ rotate: `${rotation}deg` }] }), [rotation]);
+    return ((0, jsx_runtime_1.jsxs)(react_native_1.View, { style: [
             styles.stamp,
             size === 'small' ? styles.stampSmall : styles.stampRegular,
             shapeStyles,
             rotationStyle,
             { backgroundColor },
             style,
-        ], children: [distressed ? (_jsxs(_Fragment, { children: [_jsx(BrokenStampRing, { color: borderColor, seed: `${seedBase}-outer-ring`, shape: shape, size: size, inset: 0, opacity: 1 }), _jsx(BrokenStampRing, { color: faintBorderColor, seed: `${seedBase}-echo-ring`, shape: shape, size: size, inset: shape === 'square' ? 5 : 3, opacity: 0.76 })] })) : (_jsxs(_Fragment, { children: [_jsx(View, { pointerEvents: "none", style: [styles.solidOuterRing, shapeStyles, { borderColor }] }), _jsx(View, { pointerEvents: "none", style: [
+        ], children: [distressed ? ((0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)(BrokenStampRing, { color: borderColor, seed: `${seedBase}-outer-ring`, shape: shape, size: size, inset: 0, opacity: 1 }), (0, jsx_runtime_1.jsx)(BrokenStampRing, { color: faintBorderColor, seed: `${seedBase}-echo-ring`, shape: shape, size: size, inset: shape === 'square' ? 5 : 3, opacity: 0.76 })] })) : ((0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)(react_native_1.View, { pointerEvents: "none", style: [styles.solidOuterRing, shapeStyles, { borderColor }] }), (0, jsx_runtime_1.jsx)(react_native_1.View, { pointerEvents: "none", style: [
                             styles.solidInsetRing,
                             shape === 'square' ? styles.squareRingInset : styles.circleRingInset,
                             innerShapeStyles,
                             { borderColor: faintBorderColor },
-                        ] })] })), _jsxs(View, { style: [styles.innerRing, innerShapeStyles], children: [distressed ? (_jsx(BrokenStampRing, { color: faintBorderColor, seed: `${seedBase}-inner-ring`, shape: shape, size: size, inset: shape === 'square' ? 10 : 8, opacity: 0.86 })) : (_jsx(View, { pointerEvents: "none", style: [
+                        ] })] })), (0, jsx_runtime_1.jsxs)(react_native_1.View, { style: [styles.innerRing, innerShapeStyles], children: [distressed ? ((0, jsx_runtime_1.jsx)(BrokenStampRing, { color: faintBorderColor, seed: `${seedBase}-inner-ring`, shape: shape, size: size, inset: shape === 'square' ? 10 : 8, opacity: 0.86 })) : ((0, jsx_runtime_1.jsx)(react_native_1.View, { pointerEvents: "none", style: [
                             styles.solidInsetRing,
                             shape === 'square' ? styles.squareInnerRingInset : styles.circleInnerRingInset,
                             innerShapeStyles,
                             { borderColor: faintBorderColor },
-                        ] })), _jsx(SealText, { text: parts.year, fontFamily: fontFamily, size: size === 'small' ? 5.5 : 8.5, color: color, backgroundColor: distressColor, distress: 0.12 * textDistressScale, bleed: distressed ? (isOverlay ? 0.025 : 0.05) : 0, roughness: 0.34, seed: `${seedBase}-year`, letterSpacing: -0.8, widthScale: 0.66, lineHeight: size === 'small' ? 6.3 : 9.5, style: [styles.yearSeal, size === 'small' ? styles.yearSealSmall : styles.yearSealRegular], textStyle: textStyle }), _jsx(View, { style: [styles.divider, { backgroundColor: faintBorderColor }] }), _jsx(SealText, { text: parts.day, fontFamily: fontFamily, size: size === 'small' ? 20 : 30, color: color, backgroundColor: distressColor, distress: 0.18 * textDistressScale, bleed: distressed ? (isOverlay ? 0.04 : 0.08) : 0, roughness: 0.48, seed: `${seedBase}-day`, letterSpacing: size === 'small' ? -5.2 : -8.6, widthScale: size === 'small' ? 0.36 : 0.30, textOffsetX: size === 'small' ? 1.6 : 1.2, lineHeight: size === 'small' ? 21 : 31, textStyle: textStyle }), _jsx(View, { style: [styles.divider, { backgroundColor: faintBorderColor }] }), _jsx(SealText, { text: `${parts.month}.${parts.weekday}`, fontFamily: fontFamily, size: size === 'small' ? 6 : 8.5, color: color, backgroundColor: distressColor, distress: 0.1 * textDistressScale, bleed: distressed ? (isOverlay ? 0.025 : 0.05) : 0, roughness: 0.32, seed: `${seedBase}-month`, letterSpacing: -0.8, widthScale: 0.66, lineHeight: size === 'small' ? 6.8 : 9.5, style: [styles.monthSeal, size === 'small' ? styles.monthSealSmall : styles.monthSealRegular], textStyle: textStyle })] })] }));
+                        ] })), (0, jsx_runtime_1.jsx)(SealText_1.SealText, { text: parts.year, fontFamily: fontFamily, size: size === 'small' ? 5.5 : 8.5, color: color, backgroundColor: distressColor, distress: 0.12 * textDistressScale, bleed: distressed ? (isOverlay ? 0.025 : 0.05) : 0, roughness: 0.34, seed: `${seedBase}-year`, letterSpacing: -0.8, widthScale: 0.66, lineHeight: size === 'small' ? 6.3 : 9.5, style: [styles.yearSeal, size === 'small' ? styles.yearSealSmall : styles.yearSealRegular], textStyle: textStyle }), (0, jsx_runtime_1.jsx)(react_native_1.View, { style: [styles.divider, { backgroundColor: faintBorderColor }] }), (0, jsx_runtime_1.jsx)(SealText_1.SealText, { text: parts.day, fontFamily: fontFamily, size: size === 'small' ? 20 : 30, color: color, backgroundColor: distressColor, distress: 0.18 * textDistressScale, bleed: distressed ? (isOverlay ? 0.04 : 0.08) : 0, roughness: 0.48, seed: `${seedBase}-day`, letterSpacing: size === 'small' ? -5.2 : -8.6, widthScale: size === 'small' ? 0.36 : 0.30, textOffsetX: size === 'small' ? 1.6 : 1.2, lineHeight: size === 'small' ? 21 : 31, textStyle: textStyle }), (0, jsx_runtime_1.jsx)(react_native_1.View, { style: [styles.divider, { backgroundColor: faintBorderColor }] }), (0, jsx_runtime_1.jsx)(SealText_1.SealText, { text: `${parts.month}.${parts.weekday}`, fontFamily: fontFamily, size: size === 'small' ? 6 : 8.5, color: color, backgroundColor: distressColor, distress: 0.1 * textDistressScale, bleed: distressed ? (isOverlay ? 0.025 : 0.05) : 0, roughness: 0.32, seed: `${seedBase}-month`, letterSpacing: -0.8, widthScale: 0.66, lineHeight: size === 'small' ? 6.8 : 9.5, style: [styles.monthSeal, size === 'small' ? styles.monthSealSmall : styles.monthSealRegular], textStyle: textStyle })] })] }));
 }
 function createRandom(seed) {
     let state = 2166136261;
@@ -119,10 +122,10 @@ function createSquareSegments(seed, count, inset) {
 }
 function BrokenStampRing({ color, seed, size, shape, inset, opacity, }) {
     const segmentCount = size === 'small' ? 18 : 30;
-    const segments = useMemo(() => shape === 'square'
+    const segments = (0, react_1.useMemo)(() => shape === 'square'
         ? createSquareSegments(seed, segmentCount, inset)
         : createCircleSegments(seed, segmentCount, inset), [inset, seed, segmentCount, shape]);
-    return (_jsx(View, { pointerEvents: "none", style: [styles.brokenRing, { opacity }], children: segments.map((segment, index) => (_jsx(View, { style: [
+    return ((0, jsx_runtime_1.jsx)(react_native_1.View, { pointerEvents: "none", style: [styles.brokenRing, { opacity }], children: segments.map((segment, index) => ((0, jsx_runtime_1.jsx)(react_native_1.View, { style: [
                 styles.ringSegment,
                 {
                     left: `${segment.left}%`,
@@ -135,7 +138,7 @@ function BrokenStampRing({ color, seed, size, shape, inset, opacity, }) {
                 },
             ] }, `${seed}-${index}`))) }));
 }
-const styles = StyleSheet.create({
+const styles = react_native_1.StyleSheet.create({
     stamp: {
         alignItems: 'center',
         justifyContent: 'center',
@@ -171,12 +174,12 @@ const styles = StyleSheet.create({
         paddingHorizontal: 4,
     },
     solidOuterRing: {
-        ...StyleSheet.absoluteFillObject,
+        ...react_native_1.StyleSheet.absoluteFillObject,
         borderWidth: 1.45,
     },
     solidInsetRing: {
         position: 'absolute',
-        borderWidth: StyleSheet.hairlineWidth,
+        borderWidth: react_native_1.StyleSheet.hairlineWidth,
         opacity: 0.85,
     },
     circleRingInset: {
@@ -208,7 +211,7 @@ const styles = StyleSheet.create({
     },
     divider: {
         width: '58%',
-        height: StyleSheet.hairlineWidth,
+        height: react_native_1.StyleSheet.hairlineWidth,
         marginVertical: 1,
     },
     yearSeal: {
@@ -227,7 +230,7 @@ const styles = StyleSheet.create({
         marginTop: -0.8,
     },
     brokenRing: {
-        ...StyleSheet.absoluteFillObject,
+        ...react_native_1.StyleSheet.absoluteFillObject,
         overflow: 'hidden',
     },
     ringSegment: {

@@ -1,6 +1,6 @@
 {
   "name": "@life-hack-tools/hanko",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "React Native hanko-style date stamps and SVG distressed seal text.",
   "license": "MIT",
   "sideEffects": false,
