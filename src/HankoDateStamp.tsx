@@ -190,7 +190,7 @@ export function HankoDateStamp({
           seed={`${seedBase}-day`}
           letterSpacing={size === 'small' ? -5.2 : -8.6}
           widthScale={size === 'small' ? 0.36 : 0.30}
-          textOffsetX={size === 'small' ? 1.6 : 1.2}
+          textOffsetX={0}
           lineHeight={size === 'small' ? 21 : 31}
           textStyle={textStyle}
         />
